@@ -1,12 +1,13 @@
-
+import 'package:admin/models/keluarga_info.dart';
+// import 'package:admin/models/penduduk_info.dart';
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:admin/models/my_files.dart';
-import '../../../constants.dart';
-import 'file_info_card.dart';
 
-class MyFiles extends StatelessWidget {
-  const MyFiles({
+import '../../../constants.dart';
+import 'penduduk_info_card.dart';
+
+class ListPenduduk extends StatelessWidget {
+  const ListPenduduk({
     Key? key,
   }) : super(key: key);
 
@@ -19,31 +20,19 @@ class MyFiles extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "My Files",
+              "Penduduk",
               style: Theme.of(context).textTheme.titleMedium,
-            ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                ),
-              ),
-              onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text("Add New"),
             ),
           ],
         ),
         SizedBox(height: defaultPadding),
         Responsive(
-          mobile: FileInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 4,
-            childAspectRatio: _size.width < 650 ? 1.3 : 1,
+          mobile: pendudukCardGridView(
+            crossAxisCount: _size.width < 650 ? 1 : 4,
+            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
-          tablet: FileInfoCardGridView(),
-          desktop: FileInfoCardGridView(
+          tablet: pendudukCardGridView(),
+          desktop: pendudukCardGridView(
             childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
           ),
         ),
@@ -52,10 +41,10 @@ class MyFiles extends StatelessWidget {
   }
 }
 
-class FileInfoCardGridView extends StatelessWidget {
-  const FileInfoCardGridView({
+class pendudukCardGridView extends StatelessWidget {
+  const pendudukCardGridView({
     Key? key,
-    this.crossAxisCount = 4,
+    this.crossAxisCount = 2,
     this.childAspectRatio = 1,
   }) : super(key: key);
 
@@ -67,14 +56,14 @@ class FileInfoCardGridView extends StatelessWidget {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: demoMyFiles.length,
+      itemCount: demoKeluargaInfo.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: defaultPadding,
         mainAxisSpacing: defaultPadding,
         childAspectRatio: childAspectRatio,
       ),
-      itemBuilder: (context, index) => FileInfoCard(info: demoMyFiles[index]),
+      itemBuilder: (context, index) => pendudukCard(keluargaiInfo: demoKeluargaInfo[index],),
     );
   }
 }

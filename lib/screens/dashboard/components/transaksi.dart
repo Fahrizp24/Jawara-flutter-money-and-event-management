@@ -1,9 +1,10 @@
-import 'package:admin/models/my_files.dart';
-import 'package:admin/responsive.dart';
-import 'package:flutter/material.dart';
 
+import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/components/transaksi_fields.dart';
+import 'package:flutter/material.dart';
+import 'package:admin/models/transaksi_info.dart';
 import '../../../constants.dart';
-import 'file_info_card.dart';
+import 'transaksi_info_card.dart';
 
 class MyFiles extends StatelessWidget {
   const MyFiles({
@@ -40,7 +41,7 @@ class MyFiles extends StatelessWidget {
         Responsive(
           mobile: FileInfoCardGridView(
             crossAxisCount: _size.width < 650 ? 2 : 4,
-            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
+            childAspectRatio: _size.width < 650 ? 1.3 : 1,
           ),
           tablet: FileInfoCardGridView(),
           desktop: FileInfoCardGridView(
@@ -67,14 +68,14 @@ class FileInfoCardGridView extends StatelessWidget {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: demoMyFiles.length,
+      itemCount: demoListTransaksi.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: defaultPadding,
         mainAxisSpacing: defaultPadding,
         childAspectRatio: childAspectRatio,
       ),
-      itemBuilder: (context, index) => FileInfoCard(info: demoMyFiles[index]),
+      itemBuilder: (context, index) => TransaksiInfoCard(info: demoListTransaksi[index]),
     );
   }
 }

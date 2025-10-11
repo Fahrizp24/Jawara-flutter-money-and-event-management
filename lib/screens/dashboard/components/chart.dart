@@ -1,42 +1,47 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
 
 class Chart extends StatelessWidget {
+  final String title;
+  final Color bgColor;
+  final List<PieChartSectionData> chartData;
+
   const Chart({
     Key? key,
+    required this.title,
+    required this.bgColor,
+    required this.chartData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: Stack(
+    return Container(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+        color: bgColor.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PieChart(
-            PieChartData(
-              sectionsSpace: 0,
-              centerSpaceRadius: 70,
-              startDegreeOffset: -90,
-              sections: paiChartSelectionData,
-            ),
+          Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
-          Positioned.fill(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: defaultPadding),
-                Text(
-                  "29.1",
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        height: 0.5,
-                      ),
-                ),
-                Text("of 128GB")
-              ],
+          const SizedBox(height: defaultPadding),
+          AspectRatio(
+            aspectRatio: 1.3,
+            child: PieChart(
+              PieChartData(
+                borderData: FlBorderData(show: false),
+                sectionsSpace: 0,
+                centerSpaceRadius: 0,
+                sections: chartData,
+              ),
             ),
           ),
         ],
@@ -45,35 +50,116 @@ class Chart extends StatelessWidget {
   }
 }
 
-List<PieChartSectionData> paiChartSelectionData = [
+// Contoh data pemasukan
+final List<PieChartSectionData> pemasukanData = [
   PieChartSectionData(
-    color: primaryColor,
-    value: 25,
-    showTitle: false,
-    radius: 25,
+    color: Colors.redAccent,
+    value: 100,
+    title: '100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
+];
+
+// Contoh data pengeluaran
+final List<PieChartSectionData> pengeluaranData = [
   PieChartSectionData(
-    color: Color(0xFF26E5FF),
-    value: 20,
-    showTitle: false,
-    radius: 22,
+    color: Colors.redAccent,
+    value: 100,
+    title: '100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
+];
+
+final List<PieChartSectionData> statusPenduduk = [
   PieChartSectionData(
-    color: Color(0xFFFFCF26),
-    value: 10,
-    showTitle: false,
-    radius: 19,
+    color: const Color.fromARGB(255, 157, 184, 35),
+    value: 100,
+    title: '100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
+];
+
+final List<PieChartSectionData> jenisKelamin = [
   PieChartSectionData(
-    color: Color(0xFFEE2727),
-    value: 15,
-    showTitle: false,
-    radius: 16,
+    color: const Color.fromARGB(255, 201, 7, 104),
+    value: 100,
+    title: 'Laki laki 100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
+];
+
+final List<PieChartSectionData> pekerjaanPenduduk = [
   PieChartSectionData(
-    color: primaryColor.withOpacity(0.1),
-    value: 25,
-    showTitle: false,
-    radius: 13,
+    color: const Color.fromARGB(255, 201, 7, 104),
+    value: 100,
+    title: 'Lainnya 100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+];
+
+final List<PieChartSectionData> peranKeluarga = [
+  PieChartSectionData(
+    color: const Color.fromARGB(255, 201, 7, 104),
+    value: 67,
+    title: 'Kepala Keluarga 67%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+];
+
+final List<PieChartSectionData> agama = [
+  PieChartSectionData(
+    color: const Color.fromARGB(255, 201, 7, 104),
+    value: 100,
+    title: 'Islam 100%',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+];
+
+final List<PieChartSectionData> pendidikan = [
+  PieChartSectionData(
+    color: const Color.fromARGB(255, 201, 7, 104),
+    value: 100,
+    title: 'Sarjana/Diploma',
+    radius: 80,
+    titleStyle: const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
   ),
 ];
